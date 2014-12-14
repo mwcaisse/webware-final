@@ -15,7 +15,8 @@ dao.connect = function() {
     client.connect({
         host: "localhost",
         user: "mwcaisse",
-        password: "mwcaisse_pw"
+        password: "mwcaisse_pw",
+        db: "mwcaisse_db"
     });
 
     return client;
