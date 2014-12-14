@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var bugDAO = require('../js/BugDao');
+
 /* GET home page. */
 router.get('/', function(req, res) {
     res.redirect('/index.html');
@@ -12,8 +14,10 @@ router.get('/index.html', function(req, res) {
 });
 
 /* retrieve bug listing */
-router.get('/bug/all', function() {
-    
+router.get('/bug/all', function(req, res) {
+    bugDAO.fetchAllBugs(function (results) {
+        res.json(results);
+    });
 });
 
 /* retrieve bug by id */
