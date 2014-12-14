@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+img {
+  height: 55px;
+  float: left;
+  margin-right: 4px;
+}
+
+div {
+  border: 1px solid black;
+  padding: 3px 3px 3px 3px;
+}
+
+#addBug {
+  float: right;
+}

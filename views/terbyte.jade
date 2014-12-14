@@ -1,6 +1,7 @@
 extends layout
 block content
-    div
+    div(class=header)
+        img(src="svg/Red_bug.svg")
         h1= title
         p= message
-        button#addBug Add Bug
+        button(id=addBug class="btn btn-primary") Add Bug
