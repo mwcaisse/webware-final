@@ -21,8 +21,11 @@ router.get('/bug/all', function(req, res) {
 });
 
 /* retrieve bug by id */
-router.get('/bug/id/:id', function() {
-    
+router.get('/bug/id/:id', function(req, res) {
+    var bugId = req.params.id;
+    bugDAO.fetchBugById(bugId, function(results) {
+        res.json(results);
+    });
 });
 
 /* retrieve user listing */

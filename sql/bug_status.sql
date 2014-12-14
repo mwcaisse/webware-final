@@ -7,6 +7,4 @@ INSERT INTO BUG_STATUS (BUG_STATUS)
 
     VALUES ('New'),
            ('Assigned'),
-           ('Completed'),
-           ('Not a Bug'),
-           ('QA Testing');
+           ('Completed');
