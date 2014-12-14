@@ -1,7 +1,12 @@
 extends layout
 block content
-    div(class=header)
-        img(src="svg/Red_bug.svg")
-        h1= title
-        p= message
-        button(id=addBug class="btn btn-primary") Add Bug
+    div(class="header")
+        div(class="col-md-1")
+            img(src="svg/Red_bug.svg")
+        div(class="col-md-10")
+            h1= title
+            p= message
+        div(class="col-md-1")
+            button(id="addBug" type="submit" class="btn btn-primary") Add Bug
+
+
