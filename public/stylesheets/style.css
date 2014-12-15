@@ -1,19 +1,22 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url(/img/background.png)
 }
 
 a {
   color: #00B7FF;
 }
 
-.div1 {
-  alignment: center;
-}
+
 img {
   height: 85px;
   float: left;
   margin-right: 4px;
+}
+
+.div1 {
+  alignment: center;
 }
 
 .header {
