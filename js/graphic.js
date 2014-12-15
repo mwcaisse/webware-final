@@ -1,0 +1,74 @@
+var BugDao = require('BugDao');
+require('highcharts');
+
+function renderPie(type) {
+    if(type == 'Priority') {
+        BugDao.fetchAllBugs(new function (results) {
+            var holes = [0,0,0];
+            var total = 0;
+            for (var bugitem in results) {
+                total++;
+                switch(bugitem.priority){
+                    case 'High':
+                        holes[0]++;
+                        break;
+                    case 'Medium':
+                        holes[1]++;
+                        break;
+                    case 'Low':
+                        holes[2]++;
+                        break;
+                }
+            }
+            document.getElementById('graph').highcharts({
+                title: {
+                    text: 'Bugs by Priority'
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Percent of bugs',
+                    data: [
+                        ['High', holes[0]/total],
+                        ['Medium', holes[1]/total],
+                        ['Low', holes[2]/total]
+                    ]}]
+            });
+        })
+    }
+
+    else if(type == 'Status') {
+        BugDao.fetchAllBugs(new function (results) {
+            var holes = [0,0,0];
+            var total = 0;
+            for (var bugitem in results) {
+                total++;
+                switch(bugitem.status){
+                    case 'New':
+                        holes[0]++;
+                        break;
+                    case 'Assigned':
+                        holes[1]++;
+                        break;
+                    case 'Completed':
+                        holes[2]++;
+                        break;
+                }
+            }
+            document.getElementById('graph').highcharts({
+                title: {
+                    text: 'Bugs by Status'
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Percent of bugs',
+                    data: [
+                        ['New', holes[0]/total],
+                        ['Assigned', holes[1]/total],
+                        ['Completed', holes[2]/total]
+                    ]}]
+            });
+        })
+    }
+}
+
+module.exports = renderPie;

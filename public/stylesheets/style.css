@@ -7,6 +7,9 @@ a {
   color: #00B7FF;
 }
 
+.div1 {
+  alignment: center;
+}
 img {
   height: 85px;
   float: left;
