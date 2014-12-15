@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var bugDAO = require('../js/BugDao');
+var commentDAO = require('../js/CommentDao');
+var userDAO = require('../js/UserDao');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -34,13 +36,18 @@ router.get('/bug/id/:id', function(req, res) {
 });
 
 /* retrieve user listing */
-router.get('/user/all', function() {
-    
+router.get('/user/all', function(req, res) {
+    userDAO.fetchAllUsers(function (results) {
+       res.json(results);
+    });
 });
 
 /* retrieve user by id */
-router.get('/user/id/:id', function() {
-    
+router.get('/user/id/:id', function(req, res) {
+    var userId = req.params.id;
+    userDAO.fetchUserById(userId, function (results) {
+        res.json(results);
+    });
 });
 
 /* create a new bug */

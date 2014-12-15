@@ -41,9 +41,8 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
 
     var queryParams = {bugId: bugId};
 
-    var myOnFinished = function(results) {
-        if (results.length > 0) {
-            var bug = results[0];
+    var myOnFinished = function(bug) {
+        if (bug.id) {
             //append the comments onto this bug
             commentDAO.fetchCommentsForBug(bugId, function(bugComments) {
                 bug.comments = bugComments;
@@ -55,7 +54,7 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
         }
     }
 
-    dao.fetchDataString(queryString, myOnFinished, queryParams);
+    dao.fetchSingleElementString(queryString, myOnFinished, queryParams);
 };
 
 

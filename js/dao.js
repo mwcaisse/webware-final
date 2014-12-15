@@ -65,6 +65,26 @@ dao.fetchDataString = function(queryString, onFinished, queryParams) {
 
 };
 
+/** Fetches a single element from the database
+ *
+ * @param queryString The query string to execute
+ * @param onFinished The function to call when finished, returns an array containing the results
+ * @param queryParams The parameters to the query
+ */
+dao.fetchSingleElementString = function(queryString, onFinished, queryParams) {
+    var myFinished = function(elements) {
+        if (elements.length > 0) {
+            onFinished(elements[0]);
+        }
+        else {
+            onFinished({});
+        }
+    };
+
+    dao.fetchDataString(queryString, myFinished, queryParams);
+
+};
+
 /** Exexcutes the specified insert command
  *
  * @param queryString The query string for the insert
