@@ -13,6 +13,11 @@ router.get('/index.html', function(req, res) {
     res.render('terbyte', { title: 'TerByte', message: 'A Team Plasma Innovation' });
 });
 
+/* GET graph page. */
+router.get('/graph', function(req, res) {
+    res.render('graph', {} );
+});
+
 /* retrieve bug listing */
 router.get('/bug/all', function(req, res) {
     bugDAO.fetchAllBugs(function (results) {
