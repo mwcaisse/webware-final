@@ -1,12 +1,12 @@
 extends layout
 block content
-    div(class="header")
+    div(class="header bg-info")
         div(class="col-md-1")
             img(src="svg/Red_bug.svg")
         div(class="col-md-10")
             h1= title
-            p= message
+            span= message
         div(class="col-md-1")
-            button(id="addBug" type="submit" class="btn btn-primary") Add Bug
+            button(id="addBug" type="submit" class="btn btn-success") Add Bug
 
 
