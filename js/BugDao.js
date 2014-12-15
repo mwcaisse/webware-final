@@ -1,5 +1,6 @@
 
 var dao = require('../js/dao');
+var commentDAO = require('../js/CommentDao');
 
 var bugDAO = new Object();
 
@@ -42,7 +43,12 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
 
     var myOnFinished = function(results) {
         if (results.length > 0) {
-            onFinished(results[0])
+            var bug = results[0];
+            //append the comments onto this bug
+            commentDAO.fetchCommentsForBug(bugId, function(bugComments) {
+                bug.comments = bugComments;
+                onFinished(bug);
+            });
         }
         else {
             onFinished({}); //no results returned
@@ -51,6 +57,8 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
 
     dao.fetchDataString(queryString, myOnFinished, queryParams);
 };
+
+
 
 /** Export the functions / object */
 module.exports = bugDAO;
