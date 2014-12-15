@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var util = require("util");
 var bugDAO = require('../js/BugDao');
 var commentDAO = require('../js/CommentDao');
 var userDAO = require('../js/UserDao');

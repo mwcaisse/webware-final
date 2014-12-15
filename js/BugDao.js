@@ -11,6 +11,7 @@ var bugDAO = new Object();
  */
 bugDAO.fetchAllBugs = function(onFinished) {
     var queryString = "SELECT BUG_ID as id, " +
+        "BUG_TITLE as title, " +
         "BUG_PRIORITY as priority, " +
         "BUG_CREATE_DATE as createDate, " +
         "BUG_STATUS as status, " +
@@ -30,6 +31,7 @@ bugDAO.fetchAllBugs = function(onFinished) {
  */
 bugDAO.fetchBugById = function(bugId, onFinished) {
     var queryString = "SELECT BUG_ID as id, " +
+        "BUG_TITLE as title, " +
         "BUG_PRIORITY as priority, " +
         "BUG_CREATE_DATE as createDate, " +
         "BUG_STATUS as status, " +
