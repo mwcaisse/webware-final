@@ -1,3 +1,4 @@
+
 window.addEventListener("load", init, false);
 
 function init() {
@@ -13,6 +14,11 @@ function init() {
             xmlHttp.send( null );
             renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));},
         false);
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "chart", false );
+    xmlHttp.send( null );
+    renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));
 
 }
 

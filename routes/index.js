@@ -52,12 +52,18 @@ router.get('/user/id/:id', function(req, res) {
 
 /* create a new bug */
 router.post('/bug/create', function(req, res) {
-    
+    var bug = req.body;
+    bugDAO.createBug(bug, function(success) {
+       res.json(success);
+    });
 });
 
 /* update a bug */
-router.post('/bug/update', function() {
-    
+router.post('/bug/update', function(req, res) {
+    var bug = req.body;
+    bugDAO.updateBug(bug, function(success) {
+        res.json(success);
+    });
 });
 
 /* create a comment */
