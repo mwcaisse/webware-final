@@ -46,7 +46,7 @@ router.get('/user/id/:id', function(req, res) {
 });
 
 /* create a new bug */
-router.post('/bug/create', function() {
+router.post('/bug/create', function(req, res) {
     
 });
 

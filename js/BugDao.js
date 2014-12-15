@@ -1,6 +1,7 @@
 
 var dao = require('../js/dao');
 var commentDAO = require('../js/CommentDao');
+var userDAO = require('../js/UserDao');
 
 var bugDAO = new Object();
 
@@ -52,9 +53,40 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
         else {
             onFinished({}); //no results returned
         }
-    }
+    };
 
     dao.fetchSingleElementString(queryString, myOnFinished, queryParams);
+};
+
+/** Creates the specified bug
+ *
+ * @param bug The bug to create
+ * @param onFinished The function to call when creation is finished
+ */
+bugDAO.createBug = function(bug, onFinished) {
+    
+};
+
+/** Converts the Author and Assign user names into user ids
+ *
+ * @param bug The bug to perform the conversion on
+ * @param onFinished The function that will be called when finished, with a reference to the bug
+ */
+
+bugDAO.addUserIdToBug = function(bug, onFinished) {
+    userDAO.fetchUserByName(bug.author, function (user_author) {
+        bug.author = user_author.id;
+        userDAO.fetchUserByName(bug.assigned, function (user_assigned) {
+            bug.assigned = user_assigned.id;
+            onFinished(bug);
+        });
+    });
+};
+
+dao.insertGameReview = function(game, score, company, onFinished) {
+    dao.insertData("INSERT INTO mwcaisse_db.GAME_REVIEW (GAME, SCORE, COMPANY)" +
+        "VALUES (:game, :score, :company)", {game: game, score: score, company: company},
+        onFinished);
 };
 
 

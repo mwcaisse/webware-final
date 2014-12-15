@@ -32,7 +32,24 @@ userDAO.fetchUserById = function(userId, onFinished) {
 
     dao.fetchSingleElementString(queryString, onFinished, queryParams);
 
-}
+};
+
+/** Fetches the user with the specified name
+ *
+ * @param userId The id of the user to fetch
+ * @param onFinished THe method to call with the results when finished
+ */
+userDAO.fetchUserByName = function(userName, onFinished) {
+    var queryString = "SELECT USER_ID as id, " +
+        "USER_NAME as name, " +
+        "USER_ROLE as role FROM USER " +
+        "WHERE USER_NAME = (:userName)";
+
+    var queryParams = {userName: userName};
+
+    dao.fetchSingleElementString(queryString, onFinished, queryParams);
+
+};
 
 
 module.exports = userDAO;
