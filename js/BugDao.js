@@ -61,10 +61,48 @@ bugDAO.fetchBugById = function(bugId, onFinished) {
 /** Creates the specified bug
  *
  * @param bug The bug to create
- * @param onFinished The function to call when creation is finished
+ * @param onFinished The function to call when update is finished, with true or false indicating success / failure
  */
 bugDAO.createBug = function(bug, onFinished) {
-    
+    bugDAO.addUserIdToBug(bug, function(newBug) {
+        //bug should have all users as ids now, perform a create
+        var queryString = "INSERT INTO BUG (BUG_TITLE, BUG_PRIORITY, BUG_STATUS, BUG_AUTHOR, BUG_DESCRIPTION, BUG_ASSIGNED) " +
+                "VALUES (:title, :priority, :status, :author, :description, :assigned)";
+
+        var queryParams = bug;
+
+        dao.insertData(queryString, queryParams, onFinished);
+    });
+};
+
+
+/** Updates the specified bug
+ *
+ * @param bug The bug to update
+ * @param onFinished The function to call when update is finished, with true or false indicating success / failure
+ */
+bugDAO.updateBug = function(bug, onFinished) {
+    bugDAO.addUserIdToBug(bug, function(newBug) {
+        //bug should have all users as ids now, perform a create
+        var queryString = "UPDATE BUG " +
+            "SET BUG_TITLE = :title, " +
+            "BUG_PRIORITY = :priority, " +
+            "BUG_STATUS = :status, " +
+            "BUG_AUTHOR = :author, " +
+            "BUG_DESCRIPTION = :description, " +
+            "BUG_ASSIGNED = :assigned " +
+            "WHERE BUG_ID = :id";
+
+        var queryParams = bug;
+
+        dao.insertData(queryString, queryParams, onFinished);
+    });
+};
+
+dao.insertGameReview = function(game, score, company, onFinished) {
+    dao.insertData("INSERT INTO mwcaisse_db.GAME_REVIEW (GAME, SCORE, COMPANY)" +
+        "VALUES (:game, :score, :company)", {game: game, score: score, company: company},
+        onFinished);
 };
 
 /** Converts the Author and Assign user names into user ids
@@ -83,11 +121,7 @@ bugDAO.addUserIdToBug = function(bug, onFinished) {
     });
 };
 
-dao.insertGameReview = function(game, score, company, onFinished) {
-    dao.insertData("INSERT INTO mwcaisse_db.GAME_REVIEW (GAME, SCORE, COMPANY)" +
-        "VALUES (:game, :score, :company)", {game: game, score: score, company: company},
-        onFinished);
-};
+
 
 
 
