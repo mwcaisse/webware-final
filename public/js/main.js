@@ -7,18 +7,23 @@ function init() {
 
     gOpt.value = 'Priority';
 
-    gOpt.addEventListener("change",
-        new function(){
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open( "GET", "chart", false );
-            xmlHttp.send( null );
-            renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));},
-        false);
+    gOpt.addEventListener("change", function () {
 
+            $.getJSON("/bug/all", function (data) {
+                renderPie(gOpt.value, data);
+            });
+        }, false);
+
+    $.getJSON("/bug/all", function (data) {
+        renderPie(gOpt.value, data);
+    });
+
+/*
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "chart", false );
     xmlHttp.send( null );
     renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));
+    */
 
 }
 
@@ -41,7 +46,7 @@ function renderPie(type, json) {
                         break;
                 }
             }
-            document.getElementById('graph').highcharts({
+            $('#graph').highcharts({
                 title: {
                     text: 'Bugs by Priority'
                 },
@@ -72,7 +77,7 @@ function renderPie(type, json) {
                         break;
                 }
             }
-            document.getElementById('graph').highcharts({
+            $('#graph').highcharts({
                 title: {
                     text: 'Bugs by Status'
                 },
