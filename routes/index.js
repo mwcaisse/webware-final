@@ -72,11 +72,5 @@ router.post('/comment', function() {
     
 });
 
-/* retrieve info for piechart */
-router.get('/chart', function() {
-    bugDAO.fetchAllBugs(function(results) {
-        res.json(results);
-    });
-});
 
 module.exports = router;
