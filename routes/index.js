@@ -15,6 +15,11 @@ router.get('/index.html', function(req, res) {
     res.render('terbyte', { title: 'TerByte', message: 'A Team Plasma Innovation' });
 });
 
+/* GET graph page. */
+router.get('/graph', function(req, res) {
+    res.render('graph', {} );
+});
+
 /* retrieve bug listing */
 router.get('/bug/all', function(req, res) {
     bugDAO.fetchAllBugs(function (results) {
@@ -58,6 +63,13 @@ router.post('/bug/update', function() {
 /* create a comment */
 router.post('/comment', function() {
     
+});
+
+/* retrieve info for piechart */
+router.get('/chart', function() {
+    bugDAO.fetchAllBugs(function(results) {
+        res.json(results);
+    });
 });
 
 module.exports = router;

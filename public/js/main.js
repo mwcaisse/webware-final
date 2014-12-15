@@ -1,12 +1,27 @@
-var BugDao = require('BugDao');
-require('highcharts');
+window.addEventListener("load", init, false);
 
-function renderPie(type) {
+function init() {
+
+    var gOpt = document.getElementById('graphoptions');
+
+    gOpt.value = 'Priority';
+
+    gOpt.addEventListener("change",
+        new function(){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", "chart", false );
+            xmlHttp.send( null );
+            renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));},
+        false);
+
+}
+
+
+function renderPie(type, json) {
     if(type == 'Priority') {
-        BugDao.fetchAllBugs(new function (results) {
             var holes = [0,0,0];
             var total = 0;
-            for (var bugitem in results) {
+            for (var bugitem in json) {
                 total++;
                 switch(bugitem.priority){
                     case 'High':
@@ -33,14 +48,11 @@ function renderPie(type) {
                         ['Low', holes[2]/total]
                     ]}]
             });
-        })
-    }
-
+        }
     else if(type == 'Status') {
-        BugDao.fetchAllBugs(new function (results) {
             var holes = [0,0,0];
             var total = 0;
-            for (var bugitem in results) {
+            for (var bugitem in json) {
                 total++;
                 switch(bugitem.status){
                     case 'New':
@@ -67,8 +79,5 @@ function renderPie(type) {
                         ['Completed', holes[2]/total]
                     ]}]
             });
-        })
-    }
+        }
 }
-
-module.exports = renderPie;
