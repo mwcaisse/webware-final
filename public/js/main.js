@@ -29,66 +29,49 @@ function init() {
 
 
 function renderPie(type, json) {
-    if(type == 'Priority') {
-            var holes = [0,0,0];
-            var total = 0;
-            for (var bugitem in json) {
-                total++;
-                switch(bugitem.priority){
-                    case 'High':
-                        holes[0]++;
-                        break;
-                    case 'Medium':
-                        holes[1]++;
-                        break;
-                    case 'Low':
-                        holes[2]++;
-                        break;
+    var names;
+    if(type == 'Priority')
+        names = ['High', 'Medium', 'Low'];
+    else if(type == 'Status')
+        names = ['New', 'Assigned', 'Completed'];
+
+    var holes = [0,0,0];
+    var total = 0;
+    for (var bugitem in json) {
+        total++;
+        switch(bugitem.priority){
+            case names[0]:
+                holes[0]++;
+                break;
+            case names[1]:
+                holes[1]++;
+                break;
+            case names[2]:
+                holes[2]++;
+                break;
+        }
+    }
+    $('#graph').highcharts({
+        title: {
+            text: 'Bugs by Priority'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
             }
-            $('#graph').highcharts({
-                title: {
-                    text: 'Bugs by Priority'
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Percent of bugs',
-                    data: [
-                        ['High', holes[0]/total],
-                        ['Medium', holes[1]/total],
-                        ['Low', holes[2]/total]
-                    ]}]
-            });
-        }
-    else if(type == 'Status') {
-            var holes = [0,0,0];
-            var total = 0;
-            for (var bugitem in json) {
-                total++;
-                switch(bugitem.status){
-                    case 'New':
-                        holes[0]++;
-                        break;
-                    case 'Assigned':
-                        holes[1]++;
-                        break;
-                    case 'Completed':
-                        holes[2]++;
-                        break;
-                }
-            }
-            $('#graph').highcharts({
-                title: {
-                    text: 'Bugs by Status'
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Percent of bugs',
-                    data: [
-                        ['New', holes[0]/total],
-                        ['Assigned', holes[1]/total],
-                        ['Completed', holes[2]/total]
-                    ]}]
-            });
-        }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Percent of bugs',
+            data: [
+                [names[0], holes[0]/total],
+                [names[1], holes[1]/total],
+                [names[2], holes[2]/total]
+            ]}]
+    });
 }
+
