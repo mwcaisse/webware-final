@@ -281,6 +281,7 @@ function openBugDetails( bugId ) {
         detailState = VIEW_BUG;
         disableDetailForm();
     }, 'html' );
+    getComments();
 }
 
 function createBug() {
