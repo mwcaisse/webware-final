@@ -193,6 +193,8 @@ function enableDetailForm() {
 
     details.priority.addClass('form-control');
     details.status.addClass('form-control');
+    document.getElementById("discussion").style.visibility = "hidden";
+    document.getElementById("newC").style.visibility = "hidden";
 }
 
 /**
@@ -212,8 +214,8 @@ function disableDetailForm() {
 
     details.priority.removeClass('form-control');
     details.status.removeClass('form-control');
-    
-    document.getElementById("div4").innerhtml = "";
+    document.getElementById("discussion").style.visibility = "visible";
+    document.getElementById("newC").style.visibility = "visible";
 }
 
 // Initialize bug detail pane
