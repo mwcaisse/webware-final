@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url(/img/background.png)
+  background: url(/img/background.png);
 }
 
 a {
@@ -37,20 +37,28 @@ span {
   margin-top: 20px;
   padding: 5px 10px 10px 11px;
   border: 1px solid black;
-  width: 42%;
+  width: 25%;
 }
 
 #divBugList {
   margin: 20px 0px 0px 0px;
-/ / padding : 5 px 10 px 10 px 11 px;
+/*padding: 5px 10px 10px 11px;*/
   border: 1px solid black;
-  width: 42%;
+  /*padding : 5 px 10 px 10 px 11 px;*/
+  /*border: 1px solid black;*/
+  border: 1px solid black;
+
+  width: 25%;
 }
 
 
 .discussion{
   height: 50%;
   overflow: auto;
+}
+
+.newC{
+  margin: 1px;
 }
 
 .graph {
@@ -67,6 +75,9 @@ span {
   margin-top: 30px;
 }
 
+/*******************/
+/* these can go... */
+/*******************/
 .Medium {
   background: orange;
 }
@@ -78,6 +89,10 @@ span {
 .Low {
   background: yellow;
 }
+/*********************/
+/* ^ these can go... */
+/*********************/
+
 .circle {
   padding: 10px 11px;
   width: 1px;
@@ -88,3 +103,132 @@ span {
   width: 1%;
 }
 
+/* Priority colors */
+
+.High-priority		{ background-color: #e40 }
+.Medium-priority		{ background-color: #f80 }
+.Low-priority		{ background-color: #ed0 }
+
+/* Status colors */
+
+.New-status			{ background-color: #0af }
+.Assigned-status		{ background-color: #0b0 }
+.Completed-status	{ background-color: #ccc }
+
+/* Bootstrap alternatives to make the grid system more functional */
+
+.column {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.column.fit {
+  flex: none;
+}
+
+.column.one {
+  flex: 1;
+}
+
+/*
+ * Begin bug detail styles
+ */
+
+.div-two .row {
+  display: flex;
+  padding: .5em 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.detail {
+  padding: .5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail h3 {
+  margin: 0 0 .5rem;
+}
+
+/* Bug creation/update form styles */
+
+#detail-form {
+  margin: 0;
+}
+
+#editButton {
+  float: right;
+  color: #fff;
+}
+
+#bugDescription[disabled], #bugTitle[disabled], .detail select[disabled] {
+  cursor: default;
+  box-shadow: none;
+  border-color: transparent;
+  resize: none;
+  outline: none;
+}
+
+.form-control {
+  color: inherit;
+}
+
+#bugDescription[disabled], #bugTitle[disabled] {
+  background-color: transparent;
+}
+
+#bugDescription, #bugTitle {
+  padding: .5em;
+  margin: 0 -.5em;
+}
+
+#bugTitle {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.detail select {
+  -webkit-appearance: none;
+  width: auto;
+}
+
+.detail-tag {
+  display: inline-block;
+  height:28px;
+  padding: 0 1.5em;
+  margin: 3px 0;
+  line-height: 28px;
+  border-radius: 14px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.detail-tag.form-control {
+  color: inherit;
+}
+
+.detail-tag + .detail-tag {
+  margin-left: .5em;
+}
+
+#bugAssignment {
+  background-color: #fff;
+  padding: 0 .3em;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: -5px 0;
+}
+
+#bugSignature {
+  color: #999;
+  text-align: right;
+}
+
+#tmpSelect {
+  display: none;
+}
+
+/*
+ * End bug detail styles
+ */
