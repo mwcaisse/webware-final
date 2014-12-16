@@ -54,8 +54,8 @@ router.get('/user/id/:id', function(req, res) {
 /* create a new bug */
 router.post('/bug/create', function(req, res) {
     var bug = req.body;
-    bugDAO.createBug(bug, function(success) {
-       res.json(success);
+    bugDAO.createBug(bug, function(id) {
+       res.json(id);
     });
 });
 
@@ -68,15 +68,12 @@ router.post('/bug/update', function(req, res) {
 });
 
 /* create a comment */
-router.post('/comment', function() {
-    
-});
-
-/* retrieve info for piechart */
-router.get('/chart', function() {
-    bugDAO.fetchAllBugs(function(results) {
-        res.json(results);
+router.post('/comment/create', function(req, res) {
+    var comment = req.body;
+    commentDAO.createComment(comment, function(id) {
+        res.json(id);
     });
 });
+
 
 module.exports = router;

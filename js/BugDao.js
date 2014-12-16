@@ -97,15 +97,10 @@ bugDAO.updateBug = function(bug, onFinished) {
 
         var queryParams = bug;
 
-        dao.insertData(queryString, queryParams, onFinished);
+        dao.updateData(queryString, queryParams, onFinished);
     });
 };
 
-dao.insertGameReview = function(game, score, company, onFinished) {
-    dao.insertData("INSERT INTO mwcaisse_db.GAME_REVIEW (GAME, SCORE, COMPANY)" +
-        "VALUES (:game, :score, :company)", {game: game, score: score, company: company},
-        onFinished);
-};
 
 /** Converts the Author and Assign user names into user ids
  *
@@ -122,10 +117,6 @@ bugDAO.addUserIdToBug = function(bug, onFinished) {
         });
     });
 };
-
-
-
-
 
 /** Export the functions / object */
 module.exports = bugDAO;
