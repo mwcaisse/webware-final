@@ -16,6 +16,12 @@ router.get('/index.html', function(req, res) {
     res.render('terbyte', { title: 'TerByte', message: 'A Team Plasma Innovation' });
 });
 
+router.get("/buglist.html", function(req, res) {
+    bugDAO.fetchAllBugs(function (results) {
+        res.render("buglist", {bugs: results});
+    });
+});
+
 /* GET graph page. */
 router.get('/graph', function(req, res) {
     res.render('graph', {} );

@@ -8,6 +8,13 @@ a {
   color: #00B7FF;
 }
 
+table {
+  width: auto !important;
+}
+
+.center {
+  vertical-align: middle;
+}
 
 img {
   height: 85px;
@@ -27,5 +34,26 @@ img {
 
 .btn {
   margin-top: 30px;
+}
+
+.orange {
+  background: orange;
+}
+
+.red {
+  background: red;
+}
+
+.yellow {
+  backgroupd: yellow;
+}
+.circle {
+  padding: 10px 11px;
+  width: 1px;
+  height: 4px;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1%;
 }
 
