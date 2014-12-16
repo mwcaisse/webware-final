@@ -25,12 +25,16 @@ function init() {
 function renderPie(type, json) {
     var names;
     var lookat;
+    var title;
 
-    if(type == 'Priority')
+    if(type == 'Priority') {
         names = ['High', 'Medium', 'Low'];
-
-    else if(type == 'Status')
+        title = "By Priority";
+    }
+    else if(type == 'Status') {
         names = ['New', 'Assigned', 'Completed'];
+        title = "By Status";
+    }
 
     var holes = [0,0,0];
     var total = 0;
@@ -60,7 +64,15 @@ function renderPie(type, json) {
 
     $('#graph').highcharts({
         title: {
-            text: 'Bugs Overview'
+            text: title
+        },
+        chart: {
+            width: null,
+            height: null,
+            backgroundColor: null,
+            spacingTop: 0,
+            spacingBottom: 0,
+            maxPadding: 0
         },
         plotOptions: {
             pie: {
