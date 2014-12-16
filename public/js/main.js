@@ -294,7 +294,7 @@ function openBugDetails( bugId ) {
         dataType: 'html',
         success: initDetailPane
     });
-    getComments();
+
 }
 
 /* * * * * * * * * * * * * * *\
