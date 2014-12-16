@@ -15,22 +15,6 @@ function init() {
         }, false);
 
 
-    document.getElementById('cBut').addEventListener("click", function() {
-        var newComment = new Object();
-        newComment.body = document.getElementById("comment");
-        newComment.bugId = currentBugId;
-        newComment.author = document.getElementById("user");
-        document.getElementById("user").innerhtml = "";
-        document.getElementById("comment").innerhtml = "";
-
-        $.ajax({
-            type: "POST",
-            url: "/comment/create",
-            data: JSON.stringify(newComment),
-            success: getComments
-        });
-    });
-
     $.getJSON("/bug/all", function (data) {
         renderPie(gOpt.value, data);
     });
@@ -40,7 +24,24 @@ function init() {
 
 
 function getComments(){
-    $('#div4').load('/comment/pull/'+currentBugId);
+    $('#div4').load('/comment/pull/'+currentBugId, function() {
+        $('#cBut').click(function () {
+            var newComment = new Object();
+            newComment.body = document.getElementById("comment").value;
+            newComment.bugId = currentBugId;
+            newComment.author = document.getElementById("user").value;
+            document.getElementById("user").value = "";
+            document.getElementById("comment").value = "";
+
+            $.ajax({
+                type: "POST",
+                url: "/comment/create",
+                data: JSON.stringify(newComment),
+                contentType: "application/json",
+                success: getComments
+            });
+        });
+    }, false);
 }
 
 function loadBugList() {
@@ -133,7 +134,7 @@ function renderPie(type, json) {
 var editModeEnabled;
 
 // Holds the ID of the currently open bug
-var currentBugId;
+var currentBugId = 1;
 
 // Store DOM objects as jQuery objects for later usage
 var divTwo;
@@ -208,6 +209,7 @@ function disableDetailForm() {
     details.status.removeClass('form-control');
 
     editModeEnabled = false;
+    document.getElementById("div4").innerhtml = "";
 }
 
 // Initialize bug detail pane
