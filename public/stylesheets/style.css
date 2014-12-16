@@ -199,6 +199,7 @@ span {
 
 .detail select {
   -webkit-appearance: none;
+  -moz-appearance: none;
   width: auto;
 }
 
