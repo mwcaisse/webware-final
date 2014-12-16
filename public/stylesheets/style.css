@@ -64,7 +64,7 @@ span {
 }
 
 .btn {
-  margin-top: 30px;
+  margin: 28px 14px;
 }
 
 /*******************/
@@ -97,28 +97,28 @@ span {
 
 /* Priority colors */
 
-.High-priority		{ background-color: #e40 }
-.Medium-priority		{ background-color: #f80 }
-.Low-priority		{ background-color: #ed0 }
+.High-priority    { background-color: #e40 }
+.Medium-priority  { background-color: #f80 }
+.Low-priority     { background-color: #ed0 }
 
 /* Status colors */
 
-.New-status			{ background-color: #0af }
-.Assigned-status		{ background-color: #0b0 }
-.Completed-status	{ background-color: #ccc }
+.New-status       { background-color: #0af }
+.Assigned-status  { background-color: #0b0 }
+.Completed-status { background-color: #ccc }
 
 /* Bootstrap alternatives to make the grid system more functional */
 
-.column {
+.flex-col {
   margin: 0;
   box-sizing: border-box;
 }
 
-.column.fit {
+.flex-col.fit {
   flex: none;
 }
 
-.column.one {
+.flex-col.one {
   flex: 1;
 }
 
@@ -126,7 +126,7 @@ span {
  * Begin bug detail styles
  */
 
-.div-two .row {
+.flex-row {
   display: flex;
   padding: .5em 0;
   margin: 0;
@@ -135,7 +135,7 @@ span {
 
 .detail {
   padding: .5em;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
 }
 
 .detail h3 {
@@ -149,11 +149,11 @@ span {
 }
 
 #editButton {
-  float: right;
   color: #fff;
+  margin: 0;
 }
 
-#bugDescription[disabled], #bugTitle[disabled], .detail select[disabled] {
+#bugDescription[disabled], #bugTitle[disabled], .div-three select[disabled] {
   cursor: default;
   box-shadow: none;
   border-color: transparent;
@@ -165,7 +165,7 @@ span {
   color: inherit;
 }
 
-#bugDescription[disabled], #bugTitle[disabled] {
+#bugDescription[disabled], #bugTitle[disabled], #bugAssignment[disabled], #bugAuthor[disabled] {
   background-color: transparent;
 }
 
@@ -179,7 +179,7 @@ span {
   font-weight: bold;
 }
 
-.detail select {
+.div-three select {
   -webkit-appearance: none;
   width: auto;
 }
@@ -203,8 +203,7 @@ span {
   margin-left: .5em;
 }
 
-#bugAssignment {
-  background-color: #fff;
+#bugAssignment, #bugAuthor {
   padding: 0 .3em;
   display: inline-block;
   width: auto;
@@ -213,8 +212,7 @@ span {
 }
 
 #bugSignature {
-  color: #999;
-  text-align: right;
+  color: #777;
 }
 
 #tmpSelect {

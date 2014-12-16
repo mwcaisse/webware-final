@@ -1,24 +1,32 @@
 form#detail-form
-  div.row.detail
-    div.column.one
-      div.row
-        input#bugTitle.form-control(type='text', name='title', value=title)
-      div#bugSubtitle.row Assigned to
-        select#bugAssignment.form-control
-          option(selected)= assigned
-    div.column.fit.detail-right
-      div.row
-        select(class='detail-tag ' + priority + '-priority')
+  div.flex-row.detail
+    div.flex-col.one
+      div.flex-row
+        input#bugTitle.form-control(type='text', name='title', placeholder='Title', value=title)
+      div#bugSubtitle.flex-row Assigned to
+        select#bugAssignment.form-control(name='assigned')
+          each user in users
+            option(selected=assigned == user.name)= user.name
+    div.flex-col.fit.detail-right
+      div.flex-row
+        select.detail-tag(name='priority')
           each p in ['Low','Medium','High']
             option(selected=priority == p)= p
-        select(class='detail-tag ' + status + '-status')
+        select.detail-tag(name='status')
           each s in ['New','Assigned','Completed']
             option(selected=status == s)= s
-        div#tmpSelect
-      div.row
-        div.column.one
-        div.column.fit
+      div.flex-row
+        div.flex-col.one
+        div.flex-col.fit
           button#editButton.btn.btn-danger Edit Bug
-  div.row
-    textarea#bugDescription.form-control(name='description')= description
-  div#bugSignature.row Submitted by #{author} on #{createDate}
+  div.flex-row
+    textarea#bugDescription.form-control(name='description', placeholder='Description')= description
+  div#bugSignature.flex-row
+    | Submitted by
+    select#bugAuthor.form-control(name='author')
+      each user in users
+        option= user.name
+    if createDate
+      | on #{createDate}
+  div#tmpSelect
+  input#bugId(name='id', type='hidden', value=id)

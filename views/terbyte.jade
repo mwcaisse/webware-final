@@ -1,14 +1,14 @@
 extends layout
 block content
-    div(class="header bg-info")
-        div(class="col-md-1")
+    div.header.bg-info.flex-row
+        div.flex-col.fit
             img(src="svg/Red_bug.svg")
-        div(class="col-md-10")
+        div.flex-col.one
             h1= title
             span= message
-        div(class="col-md-1")
-            button(id="addBug" type="submit" class="btn btn-success") Add Bug
+        div.flex-col.fit
+            button#addBug.btn.btn-success(type="submit") Add Bug
     div
         include graph.jade
     div#divBugList.bg-info
-    div.div-two.container
+    div.div-three.container.bg-info

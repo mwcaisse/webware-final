@@ -34,11 +34,31 @@ router.get('/bug/all', function(req, res) {
     });
 });
 
+/* create a bug */
+router.get('/view/create-bug', function(req, res) {
+    userDAO.fetchAllUsers(function (results) {
+        res.render('bug-detail', {
+            id: -1,
+            title: '',
+            priority: 'Low',
+            status: 'New',
+            author: '',
+            description: '',
+            assigned: '',
+            comments: [],
+            users: results
+        });
+    });
+});
+
 /* retrieve bug by id */
-router.get('/bug/id/:id', function(req, res) {
+router.get('/view/bug/:id', function(req, res) {
     var bugId = req.params.id;
-    bugDAO.fetchBugById(bugId, function(results) {
-        res.render('bug-detail', results);
+    bugDAO.fetchBugById(bugId, function(bug) {
+        userDAO.fetchAllUsers(function (users) {
+            bug.users = users;
+            res.render('bug-detail', bug);
+        });
     });
 });
 

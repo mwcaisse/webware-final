@@ -115,13 +115,17 @@ function renderPie(type, json) {
 \* * * * * * * * * * * * * * * */
 
 // Specifies state of detail window
-var editModeEnabled;
+var detailState;
+
+const VIEW_BUG = 0;
+const EDIT_BUG = 1;
+const CREATE_BUG = 2;
 
 // Holds the ID of the currently open bug
 var currentBugId;
 
 // Store DOM objects as jQuery objects for later usage
-var divTwo;
+var divThree;
 var editButton;
 var detailForm;
 var tmpSelect;
@@ -132,7 +136,8 @@ var details = {
     priority: null,
     status: null,
     assignment: null,
-    description: null
+    description: null,
+    author: null
 }
 
 /**
@@ -147,7 +152,7 @@ function resizeSelect(e) {
 }
 
 /**
- * 
+ * Retrieves the text of the selected option of a given dropdown
  */
 function getSelectedValue(select) {
     return select[0][select[0].selectedIndex].textContent;
@@ -159,10 +164,12 @@ function getSelectedValue(select) {
 function enableDetailForm() {
     editButton.removeClass('btn-danger');
     editButton.addClass('btn-success');
-    editButton.html('Update Bug');
+    editButton.html(detailState === CREATE_BUG ? 'Submit Bug' : 'Update Bug');
 
     for(var detail in details) {
-        details[detail].removeAttr('disabled','');
+        if(detailState === CREATE_BUG || detail !== 'author') {
+            details[detail].removeAttr('disabled','');
+        }
     }
 
     details.priority.removeClass(getSelectedValue(details.priority) + '-priority');
@@ -170,8 +177,6 @@ function enableDetailForm() {
 
     details.priority.addClass('form-control');
     details.status.addClass('form-control');
-
-    editModeEnabled = true;
 }
 
 /**
@@ -191,8 +196,6 @@ function disableDetailForm() {
 
     details.priority.removeClass('form-control');
     details.status.removeClass('form-control');
-
-    editModeEnabled = false;
 }
 
 // Initialize bug detail pane
@@ -204,15 +207,20 @@ function initDetailPane( newDetailForm ) {
     tmpSelect = detailForm.find('#tmpSelect');
 
     // Cache form elements for later usage
-    details.title		= $( detailForm[0][0] );
-    details.assignment	= $( detailForm[0][1] );
-    details.priority		= $( detailForm[0][2] );
-    details.status		= $( detailForm[0][3] );
-    details.description	= $( detailForm[0][5] );
+    details.title        = $( detailForm[0][0] );
+    details.assignment   = $( detailForm[0][1] );
+    details.priority     = $( detailForm[0][2] );
+    details.status       = $( detailForm[0][3] );
+    details.description  = $( detailForm[0][5] );
+    details.author       = $( detailForm[0][6] );
+    
+    currentBugId = parseInt(detailForm[0][7].value);
 
     // Attach event listeners to resize dropdown menus
     details.priority.on('change', resizeSelect);
+    details.assignment.on('change', resizeSelect);
     details.status.on('change', resizeSelect);
+    details.author.on('change', resizeSelect);
     
     // Disable refreshing of page when the form is submitted
     detailForm.on('submit', function() {
@@ -221,36 +229,50 @@ function initDetailPane( newDetailForm ) {
     
     // Toggle edit mode
     editButton.on('click', function() {
-        if(editModeEnabled) {
+        if(detailState !== VIEW_BUG) {
+            $.post('/bug/' + (detailState === CREATE_BUG ? 'create' : 'update'), detailForm.serialize());
+            detailState = VIEW_BUG;
             disableDetailForm();
         }
         else {
+            detailState = EDIT_BUG;
             enableDetailForm();
         }
     });
     
-    // Set detail pane to read-only mode
-    disableDetailForm();
-    
     // Expose new detail pane
-    divTwo.append(detailForm);
+    divThree.empty();
+    divThree.append(detailForm);
 
     // Initilize size of dropdown menus
+    resizeSelect({target: details.assignment});
     resizeSelect({target: details.priority});
     resizeSelect({target: details.status});
+    resizeSelect({target: details.author});
 }
 
 $(document).ready(function() {
-    divTwo = $('.div-two');
+    divThree = $('.div-three');
 });
 
 function openBugDetails( bugId ) {
-    $.ajax({
-        type: 'GET',
-        url: '/bug/id/' + bugId,
-        dataType: 'html',
-        success: initDetailPane
-    });
+    $.get('/view/bug/' + bugId, null, function(newDetailForm) {
+        initDetailPane(newDetailForm);
+        
+        // Set detail pane to read-only mode
+        detailState = VIEW_BUG;
+        disableDetailForm();
+    }, 'html' );
+}
+
+function createBug() {
+   $.get('/view/create-bug', null, function(newDetailForm) {
+        initDetailPane(newDetailForm);
+        
+        // Set detail pane to create mode
+        detailState = CREATE_BUG;
+        enableDetailForm();
+    }, 'html' );
 }
 
 /* * * * * * * * * * * * * * *\
