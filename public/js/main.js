@@ -14,7 +14,7 @@ function init() {
             });
         }, false);
 
-
+/*
     document.getElementById('cBut').addEventListener("click", function() {
         var newComment = new Object();
         newComment.body = document.getElementById("comment");
@@ -27,7 +27,7 @@ function init() {
             data: JSON.stringify(newComment),
             success: getComments
         });
-    });
+    });*/
 
     $.getJSON("/bug/all", function (data) {
         renderPie(gOpt.value, data);
@@ -71,16 +71,11 @@ function loadBugList() {
         $("#divBugList tr").each(function (index) {
             var id = $(this).attr("bugId");
             $(this).click(function() {
-                displayBug(id);
+                openBugDetails(id);
             });
         });
     });
 }
-
-function displayBug(id) {
-    alert("Display bug: " + id)
-}
-
 
 function renderPie(type, json) {
     var names;
@@ -276,6 +271,7 @@ function initDetailPane( newDetailForm ) {
     disableDetailForm();
     
     // Expose new detail pane
+    divTwo.empty();
     divTwo.append(detailForm);
 
     // Initilize size of dropdown menus
