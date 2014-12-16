@@ -3,7 +3,7 @@ table(class="bg-info table table-hover")
    each bug in bugs
       tr(bugId=bug.id)
          td(class="center")
-            div(class="#{bug.priority} circle")
+            div(class="#{bug.priority}-priority circle")
          td
             p #{bug.title}
             p #{bug.status}

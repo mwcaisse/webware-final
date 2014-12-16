@@ -8,8 +8,10 @@ block content
             span= message
         div.flex-col.fit
             button#addBug.btn.btn-success(type="submit") Add Bug
-    div
-        include graph.jade
-    div#divBugList.bg-info
-    div.div-three.container.bg-info
-    div#div4.div4.bg-info
+    div#main.flex-row
+        div.flex-col.one
+            include graph.jade
+            div#divBugList.bg-info
+        div.flex-col.two-half
+            div.div-three.bg-info
+            div#div4.div4.bg-info

@@ -248,7 +248,9 @@ function initDetailPane( newDetailForm ) {
     // Toggle edit mode
     editButton.on('click', function() {
         if(detailState !== VIEW_BUG) {
-            $.post('/bug/' + (detailState === CREATE_BUG ? 'create' : 'update'), detailForm.serialize());
+            if(details.title.value !== '') {
+                $.post('/bug/' + (detailState === CREATE_BUG ? 'create' : 'update'), detailForm.serialize());
+            }
             detailState = VIEW_BUG;
             disableDetailForm();
         }

@@ -33,28 +33,25 @@ span {
   font-family: monospace;
 }
 
+#main > .flex-col {
+  padding: 0 .5em;
+}
+
 .div1 {
   margin-top: 20px;
   padding: 5px 10px 10px 11px;
-  border: 1px solid black;
-  width: 25%;
+  border: 1px solid transparent;
 }
 
 #divBugList {
   margin: 20px 0px 0px 0px;
-/*padding: 5px 10px 10px 11px;*/
-  border: 1px solid black;
-  /*padding : 5 px 10 px 10 px 11 px;*/
-  /*border: 1px solid black;*/
-
-  width: 25%;
+  border: 1px solid transparent;
 }
 
 .div4{
   margin: 20px 0px 0px 0px;
-  border: 1px solid black;
-  /*need to put on the left*/
 }
+
 /*where comments will be displayed*/
 .discussion{
   max-height: 250px;
@@ -85,24 +82,6 @@ span {
   margin: 25px;
 }
 
-/*******************/
-/* these can go... */
-/*******************/
-.Medium {
-  background: orange;
-}
-
-.High {
-  background: red;
-}
-
-.Low {
-  background: yellow;
-}
-/*********************/
-/* ^ these can go... */
-/*********************/
-
 .circle {
   padding: 10px 11px;
   width: 1px;
@@ -127,6 +106,13 @@ span {
 
 /* Bootstrap alternatives to make the grid system more functional */
 
+.flex-row {
+  display: flex;
+  padding: .5em 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .flex-col {
   margin: 0;
   box-sizing: border-box;
@@ -140,15 +126,17 @@ span {
   flex: 1;
 }
 
+.flex-col.two-half {
+  flex: 2.5;
+}
+
 /*
  * Begin bug detail styles
  */
 
-.flex-row {
-  display: flex;
-  padding: .5em 0;
-  margin: 0;
-  box-sizing: border-box;
+.div-three {
+  margin-top: 20px;
+  padding: 0 .5em;
 }
 
 .detail {
@@ -189,12 +177,12 @@ span {
 
 #bugDescription, #bugTitle {
   padding: .5em;
-  margin: 0 -.5em;
 }
 
 #bugTitle {
   font-size: 1.25em;
   font-weight: bold;
+  margin: 0 -.5em;
 }
 
 .div-three select {
