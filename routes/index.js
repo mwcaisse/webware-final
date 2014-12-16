@@ -38,7 +38,7 @@ router.get('/bug/all', function(req, res) {
 router.get('/bug/id/:id', function(req, res) {
     var bugId = req.params.id;
     bugDAO.fetchBugById(bugId, function(results) {
-        res.json(results);
+        res.render('bug-detail', results);
     });
 });
 
@@ -81,5 +81,12 @@ router.post('/comment/create', function(req, res) {
     });
 });
 
+/* get all comments */
+router.get('/comment/pull', function(req, res) {
+    var id = req.body;
+    commentDAO.fetchCommentsForBug(id, function(data) {
+        res.json(data);
+    });
+});
 
 module.exports = router;

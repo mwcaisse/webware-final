@@ -8,6 +8,7 @@ block content
             span= message
         div(class="col-md-1")
             button(id="addBug" type="submit" class="btn btn-success") Add Bug
-    include graph.jade
-    //include bug-detail.jade
-    include comments.jade
+    div
+        include graph.jade
+    div#divBugList.bg-info
+    div.div-two.container
