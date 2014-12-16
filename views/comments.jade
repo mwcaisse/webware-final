@@ -1,0 +1,13 @@
+div(id= "div4" class= "div4 bg-info")
+   h3 Comments
+   div(id= "discussion" class="discussion")
+   div(id= "newC" class="newC")
+      form(name='cForm' method='post' action='comment')
+         label(for='name') Name:
+         input(type="text" name="name")
+         <br>
+         label(for='comment') Comment:
+         <br>
+         textarea(name='comment' form='cForm')
+         <br>
+         input(type="submit")
