@@ -14,8 +14,9 @@ function init() {
             });
         }, false);
 
-/*
-    document.getElementById('cBut').addEventListener("click", function() {
+
+
+    /*document.getElementById('cBut').addEventListener("click", function() {
         var newComment = new Object();
         newComment.body = document.getElementById("comment");
         newComment.bugId = currentBugId;

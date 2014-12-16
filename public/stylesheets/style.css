@@ -51,12 +51,18 @@ span {
   width: 25%;
 }
 
-
+/*where comments will be displayed*/
 .discussion{
   height: 50%;
   overflow: auto;
 }
 
+/*each individual comment in the discussion*/
+.comment{
+
+}
+
+/*where comments will be made*/
 .newC{
   margin: 1px;
 }
