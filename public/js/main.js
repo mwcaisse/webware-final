@@ -18,6 +18,15 @@ function init() {
         renderPie(gOpt.value, data);
     });
 
+    //load up dem bugs
+    loadBugList();
+
+}
+
+function loadBugList() {
+    $('#divBugList').load('/buglist.html', function() {
+
+    });
 
 }
 

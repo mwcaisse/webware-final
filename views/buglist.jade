@@ -1,20 +1,9 @@
-extends layout
-block content
-
-   table(class="bg-info table")
-      each bug in bugs
-         - var color = ""
-         #color
-            if bug.priority == "High"
-               color = "red"
-            else if bug.priority == "Medium"
-               color = "orange"
-            else
-               color = "yellow"
-            tr
-               td(class="center")
-                  div(class="#{color} circle")
-               td
-                  p #{bug.title}
-                  p #{bug.status}
+table(class="bg-info table")
+   each bug in bugs
+      tr
+         td(class="center")
+            div(class="#{bug.priority} circle")
+         td
+            p #{bug.title}
+            p #{bug.status}
 
