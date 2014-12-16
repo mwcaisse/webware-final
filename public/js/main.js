@@ -236,6 +236,7 @@ function initDetailPane( newDetailForm ) {
     
     currentBugId = parseInt(detailForm[0][7].value);
 
+    getComments();
     // Attach event listeners to resize dropdown menus
     details.priority.on('change', resizeSelect);
     details.assignment.on('change', resizeSelect);
@@ -281,7 +282,7 @@ function openBugDetails( bugId ) {
         detailState = VIEW_BUG;
         disableDetailForm();
     }, 'html' );
-    getComments();
+
 }
 
 function createBug() {
