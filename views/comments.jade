@@ -1,13 +1,17 @@
 div(id= "div4" class= "div4 bg-info")
    h3 Comments
    div(id= "discussion" class="discussion")
+      each comment in comments
+         div(class="comment")
+            h2 #{comment.author}
+            span(style="font-style: italic;") #{comment.createDate}
+            p #{comment.body}
    div(id= "newC" class="newC")
-      form(name='cForm' method='post' action='comment')
-         label(for='name') Name:
-         input(type="text" name="name")
-         <br>
-         label(for='comment') Comment:
-         <br>
-         textarea(name='comment' form='cForm')
-         <br>
-         input(type="submit")
+      label Name:
+      input(type="text" id="user")
+      br
+      label Comment:
+      br
+      textarea(id='comment')
+      br
+      input(type="button" value="Post Comment" id="cBut")

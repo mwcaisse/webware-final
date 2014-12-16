@@ -14,13 +14,34 @@ function init() {
             });
         }, false);
 
+
     $.getJSON("/bug/all", function (data) {
         renderPie(gOpt.value, data);
     });
 
-    //load up dem bugs
     loadBugList();
+}
 
+
+function getComments(){
+    $('#div4').load('/comment/pull/'+currentBugId, function() {
+        $('#cBut').click(function () {
+            var newComment = new Object();
+            newComment.body = document.getElementById("comment").value;
+            newComment.bugId = currentBugId;
+            newComment.author = document.getElementById("user").value;
+            document.getElementById("user").value = "";
+            document.getElementById("comment").value = "";
+
+            $.ajax({
+                type: "POST",
+                url: "/comment/create",
+                data: JSON.stringify(newComment),
+                contentType: "application/json",
+                success: getComments
+            });
+        });
+    }, false);
 }
 
 function loadBugList() {
@@ -28,16 +49,11 @@ function loadBugList() {
         $("#divBugList tr").each(function (index) {
             var id = $(this).attr("bugId");
             $(this).click(function() {
-                displayBug(id);
+                openBugDetails(id);
             });
         });
     });
 }
-
-function displayBug(id) {
-    alert("Display bug: " + id)
-}
-
 
 function renderPie(type, json) {
     var names;
@@ -122,7 +138,7 @@ const EDIT_BUG = 1;
 const CREATE_BUG = 2;
 
 // Holds the ID of the currently open bug
-var currentBugId;
+var currentBugId = 1;
 
 // Store DOM objects as jQuery objects for later usage
 var divThree;
@@ -196,6 +212,8 @@ function disableDetailForm() {
 
     details.priority.removeClass('form-control');
     details.status.removeClass('form-control');
+    
+    document.getElementById("div4").innerhtml = "";
 }
 
 // Initialize bug detail pane
