@@ -12,7 +12,7 @@ var commentDAO = new Object();
 commentDAO.fetchCommentsForBug = function(bugId, onFinished) {
     var queryString = "SELECT COMMENT_ID as id, " +
         "COMMENT_BUG as bugId, " +
-        "COMMENT_AUTHOR as author, " +
+        "user_author.USER_NAME as author, " +
         "COMMENT_BODY as body, " +
         "COMMENT_CREATE_DATE as createDate FROM COMMENT " +
         "LEFT JOIN USER AS user_author ON COMMENT_AUTHOR = user_author.USER_ID " +
