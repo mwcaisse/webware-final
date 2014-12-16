@@ -15,8 +15,25 @@ img {
   margin-right: 4px;
 }
 
+select {
+  margin-top: 10px;
+}
+
+h3 {
+  text-align: center;
+  font-weight: bold;
+}
+
+span {
+  font-family: monospace;
+}
+
 .div1 {
+  margin: 20px 0px 0px 0px;
+  padding: 5px 10px 10px 11px;
+  border: 1px solid black;
   alignment: center;
+  width: 42%;
 }
 
 .header {
