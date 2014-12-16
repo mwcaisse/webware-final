@@ -164,7 +164,7 @@ function resizeSelect(e) {
     var select = $(e.target);
     var option = select[0][select[0].selectedIndex];
     tmpSelect.html(option.textContent);
-    select.width(tmpSelect.width());
+    select.width(tmpSelect.width() + (select.hasClass('detail-tag') ? 36 : 6));
 }
 
 /**
@@ -269,10 +269,6 @@ function initDetailPane( newDetailForm ) {
     resizeSelect({target: details.author});
 }
 
-$(document).ready(function() {
-    divThree = $('.div-three');
-});
-
 function openBugDetails( bugId ) {
     $.get('/view/bug/' + bugId, null, function(newDetailForm) {
         initDetailPane(newDetailForm);
@@ -292,6 +288,14 @@ function createBug() {
         enableDetailForm();
     }, 'html' );
 }
+
+$(document).ready(function() {
+    divThree = $('.div-three');
+
+    $('#addBug').click(function() {
+        createBug();
+    });
+});
 
 /* * * * * * * * * * * * * * *\
  * End bug detail JavaScript
