@@ -8,12 +8,10 @@ a {
   color: #00B7FF;
 }
 
-table {
-  width: auto !important;
-}
 
 .center {
   vertical-align: middle;
+  width: 1%;
 }
 
 img {
@@ -42,6 +40,14 @@ span {
   width: 42%;
 }
 
+#divBugList {
+  margin: 20px 0px 0px 0px;
+/ / padding : 5 px 10 px 10 px 11 px;
+  border: 1px solid black;
+  width: 42%;
+}
+
+
 .discussion{
   height: 50%;
   overflow: auto;
@@ -61,16 +67,16 @@ span {
   margin-top: 30px;
 }
 
-.orange {
+.Medium {
   background: orange;
 }
 
-.red {
+.High {
   background: red;
 }
 
-.yellow {
-  backgroupd: yellow;
+.Low {
+  background: yellow;
 }
 .circle {
   padding: 10px 11px;
