@@ -1,6 +1,6 @@
-table(class="bg-info table")
+table(class="bg-info table table-hover")
    each bug in bugs
-      tr
+      tr(bugId=bug.id)
          td(class="center")
             div(class="#{bug.priority} circle")
          td

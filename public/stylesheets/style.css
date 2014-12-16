@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url(/img/background.png)
+  background: url(/img/background.png);
 }
 
 a {
@@ -37,14 +37,14 @@ span {
   margin-top: 20px;
   padding: 5px 10px 10px 11px;
   border: 1px solid black;
-  width: 42%;
+  width: 25%;
 }
 
 #divBugList {
   margin: 20px 0px 0px 0px;
 /*padding: 5px 10px 10px 11px;*/
   border: 1px solid black;
-  width: 42%;
+  width: 25%;
 }
 
 

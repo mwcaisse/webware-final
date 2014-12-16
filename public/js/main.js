@@ -25,9 +25,17 @@ function init() {
 
 function loadBugList() {
     $('#divBugList').load('/buglist.html', function() {
-
+        $("#divBugList tr").each(function (index) {
+            var id = $(this).attr("bugId");
+            $(this).click(function() {
+                displayBug(id);
+            });
+        });
     });
+}
 
+function displayBug(id) {
+    alert("Display bug: " + id)
 }
 
 
