@@ -35,6 +35,10 @@ span {
   width: 42%;
 }
 
+.graph {
+  width: 100%;
+}
+
 .header {
   height: 100px;
   border: 1px solid black;
