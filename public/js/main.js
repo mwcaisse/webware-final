@@ -138,7 +138,7 @@ const EDIT_BUG = 1;
 const CREATE_BUG = 2;
 
 // Holds the ID of the currently open bug
-var currentBugId = 1;
+var currentBugId;
 
 // Store DOM objects as jQuery objects for later usage
 var divThree;
@@ -281,6 +281,7 @@ function openBugDetails( bugId ) {
         detailState = VIEW_BUG;
         disableDetailForm();
     }, 'html' );
+    getComments();
 }
 
 function createBug() {
