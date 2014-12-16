@@ -18,12 +18,6 @@ function init() {
         renderPie(gOpt.value, data);
     });
 
-/*
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "chart", false );
-    xmlHttp.send( null );
-    renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));
-    */
 
 }
 
@@ -39,28 +33,36 @@ function renderPie(type, json) {
     var total = 0;
     for (var bugitem in json) {
         total++;
-        switch(bugitem.priority){
-            case names[0]:
-                holes[0]++;
+        var lookat;
+        if(type == 'Priority')
+            lookat = bugitem.priority;
+        else if(type == 'Status')
+            lookat = bugitem.status;
+        switch(lookat){
+            case(names[0]):
+                holes[0] = holes[0] + 1;
                 break;
-            case names[1]:
-                holes[1]++;
+            case(names[1]):
+                holes[1] = holes[1] + 1;
                 break;
-            case names[2]:
-                holes[2]++;
+            case(names[2]):
+                holes[2] = holes[2] + 1;
                 break;
+            default:
+                console.log(JSON.stringify(bugitem));
+                break;
+
         }
     }
     $('#graph').highcharts({
         title: {
-            text: 'Bugs by Priority'
+            text: 'Bugs Overview'
         },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
                 dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    enabled: true
                 }
             }
         },
