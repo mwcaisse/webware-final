@@ -18,59 +18,77 @@ function init() {
         renderPie(gOpt.value, data);
     });
 
-/*
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "chart", false );
-    xmlHttp.send( null );
-    renderPie(gOpt.value, JSON.parse(xmlHttp.responseText));
-    */
 
 }
 
 
 function renderPie(type, json) {
     var names;
-    if(type == 'Priority')
+    var lookat;
+    var title;
+
+    if(type == 'Priority') {
         names = ['High', 'Medium', 'Low'];
-    else if(type == 'Status')
+        title = "By Priority";
+    }
+    else if(type == 'Status') {
         names = ['New', 'Assigned', 'Completed'];
+        title = "By Status";
+    }
 
     var holes = [0,0,0];
     var total = 0;
-    for (var bugitem in json) {
+    jQuery.each(json, function(index, bugitem) {
         total++;
-        switch(bugitem.priority){
-            case names[0]:
-                holes[0]++;
+        if(type == 'Priority')
+            lookat = bugitem.priority;
+        else if(type == 'Status')
+            lookat = bugitem.status;
+
+        switch(lookat){
+            case(names[0]):
+                holes[0] = holes[0] + 1;
                 break;
-            case names[1]:
-                holes[1]++;
+            case(names[1]):
+                holes[1] = holes[1] + 1;
                 break;
-            case names[2]:
-                holes[2]++;
+            case(names[2]):
+                holes[2] = holes[2] + 1;
                 break;
+            default:
+                console.log(JSON.stringify(bugitem));
+                break;
+
         }
-    }
+    });
+
     $('#graph').highcharts({
         title: {
-            text: 'Bugs by Priority'
+            text: title
+        },
+        chart: {
+            width: null,
+            height: null,
+            backgroundColor: null,
+            spacingTop: 0,
+            spacingBottom: 0,
+            maxPadding: 0
         },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
                 dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    enabled: true
                 }
             }
         },
         series: [{
             type: 'pie',
-            name: 'Percent of bugs',
+            name: '# of Bugs',
             data: [
-                [names[0], holes[0]/total],
-                [names[1], holes[1]/total],
-                [names[2], holes[2]/total]
+                [names[0], holes[0]],
+                [names[1], holes[1]],
+                [names[2], holes[2]]
             ]}]
     });
 }
