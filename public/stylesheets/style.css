@@ -46,14 +46,18 @@ span {
   border: 1px solid black;
   /*padding : 5 px 10 px 10 px 11 px;*/
   /*border: 1px solid black;*/
-  border: 1px solid black;
 
   width: 25%;
 }
 
+.div4{
+  margin: 20px 0px 0px 0px;
+  border: 1px solid black;
+  /*need to put on the left*/
+}
 /*where comments will be displayed*/
 .discussion{
-  height: 50%;
+  max-height: 250px;
   overflow: auto;
 }
 

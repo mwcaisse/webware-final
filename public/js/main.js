@@ -15,11 +15,13 @@ function init() {
         }, false);
 
 
-    /*document.getElementById('cBut').addEventListener("click", function() {
+    document.getElementById('cBut').addEventListener("click", function() {
         var newComment = new Object();
         newComment.body = document.getElementById("comment");
         newComment.bugId = currentBugId;
         newComment.author = document.getElementById("user");
+        document.getElementById("user").innerhtml = "";
+        document.getElementById("comment").innerhtml = "";
 
         $.ajax({
             type: "POST",
@@ -27,7 +29,7 @@ function init() {
             data: JSON.stringify(newComment),
             success: getComments
         });
-    });*/
+    });
 
     $.getJSON("/bug/all", function (data) {
         renderPie(gOpt.value, data);
@@ -38,32 +40,7 @@ function init() {
 
 
 function getComments(){
-    $.ajax({
-        type: "GET",
-        url: "/comment/pull",
-        data: currentBugId,
-        success: function(data){
-            var dis = document.getElementById('discussion');
-            dis.innerHtml = "";
-            jquery.each(data, function(index, commentData) {
-                    var newComment = createElement("div");
-                    newComment.class = "comment";
-                    var cAuth = createElement("h1");
-                    cAuth.innerhtml = commentData.author;
-                    newComment.appendChild(cAuth);
-                    var cDate = createElement("h2");
-                    cDate.innerhtml = commentData.createData;
-                    newComment.appendChild(cDate);
-                    var cBody = createElement("p");
-                    cBody.innerhtml = commentData.body;
-                    newComment.appendChild(cBody);
-                    dis.appendChild(newComment);
-                }
-            );
-        }
-    });
-
-
+    $('#div4').load('/comment/pull/'+currentBugId);
 }
 
 function loadBugList() {
@@ -294,7 +271,7 @@ function openBugDetails( bugId ) {
         dataType: 'html',
         success: initDetailPane
     });
-
+    getComments();
 }
 
 /* * * * * * * * * * * * * * *\

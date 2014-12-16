@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 
 /* GET home page. */
 router.get('/index.html', function(req, res) {
-    res.render('terbyte', { title: 'TerByte', message: 'A Team Plasma Innovation' });
+    res.render('terbyte', { title: 'TerByte', message: 'A Team Plasma Innovation', comments:{} });
 });
 
 router.get("/buglist.html", function(req, res) {
@@ -82,10 +82,10 @@ router.post('/comment/create', function(req, res) {
 });
 
 /* get all comments */
-router.get('/comment/pull', function(req, res) {
-    var id = req.body;
+router.get('/comment/pull/:id', function(req, res) {
+    var id = req.params.id;
     commentDAO.fetchCommentsForBug(id, function(data) {
-        res.json(data);
+        res.render("comments", {comments: data});
     });
 });
 
