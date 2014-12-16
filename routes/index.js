@@ -105,7 +105,10 @@ router.post('/comment/create', function(req, res) {
 router.get('/comment/pull/:id', function(req, res) {
     var id = req.params.id;
     commentDAO.fetchCommentsForBug(id, function(data) {
-        res.render("comments", {comments: data});
+        userDAO.fetchAllUsers(function (results) {
+            data.users = results;
+            res.render("comments", {comments: data});
+        });
     });
 });
 

@@ -8,7 +8,9 @@ div(id= "div4" class= "div4 bg-info")
             p #{comment.body}
    div(id= "newC" class="newC")
       label Name:
-      input(type="text" id="user")
+      select#user
+         each user in comments.users
+            option= user.name
       br
       label Comment:
       br

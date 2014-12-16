@@ -144,8 +144,8 @@ span {
   border-bottom: 1px solid #aaa;
 }
 
-.detail h3 {
-  margin: 0 0 .5rem;
+.div-three > h3 {
+  text-align: center;
 }
 
 /* Bug creation/update form styles */

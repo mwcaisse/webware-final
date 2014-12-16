@@ -234,7 +234,9 @@ function initDetailPane( newDetailForm ) {
     
     currentBugId = parseInt(detailForm[0][7].value);
 
-    getComments();
+    if(detailState !== CREATE_BUG) {
+        getComments();
+    }
     // Attach event listeners to resize dropdown menus
     details.priority.on('change', resizeSelect);
     details.assignment.on('change', resizeSelect);
@@ -249,11 +251,24 @@ function initDetailPane( newDetailForm ) {
     // Toggle edit mode
     editButton.on('click', function() {
         if(detailState !== VIEW_BUG) {
-            if(details.title.value !== '') {
-                $.post('/bug/' + (detailState === CREATE_BUG ? 'create' : 'update'), detailForm.serialize());
+            if(details.title[0].value !== '') {
+                if(detailState === CREATE_BUG) {
+                    $.post('/bug/create', detailForm.serialize(), function(id) {
+                        console.log(id);
+                        currentBugId = parseInt(id);
+                        getComments();
+                        detailState = VIEW_BUG;
+                        disableDetailForm();
+                        
+                        loadBugList();
+                    }, 'json');
+                }
+                else {
+                    $.post('/bug/update', detailForm.serialize());
+                    detailState = VIEW_BUG;
+                    disableDetailForm();
+                }
             }
-            detailState = VIEW_BUG;
-            disableDetailForm();
         }
         else {
             detailState = EDIT_BUG;
@@ -274,10 +289,9 @@ function initDetailPane( newDetailForm ) {
 
 function openBugDetails( bugId ) {
     $.get('/view/bug/' + bugId, null, function(newDetailForm) {
-        initDetailPane(newDetailForm);
-        
         // Set detail pane to read-only mode
         detailState = VIEW_BUG;
+        initDetailPane(newDetailForm);
         disableDetailForm();
     }, 'html' );
 
@@ -285,10 +299,9 @@ function openBugDetails( bugId ) {
 
 function createBug() {
    $.get('/view/create-bug', null, function(newDetailForm) {
-        initDetailPane(newDetailForm);
-        
         // Set detail pane to create mode
         detailState = CREATE_BUG;
+        initDetailPane(newDetailForm);
         enableDetailForm();
     }, 'html' );
 }
