@@ -15,7 +15,7 @@ function init() {
         }, false);
 
 
-    document.getElementById('cBut').addEventListener("click", function() {
+    /*document.getElementById('cBut').addEventListener("click", function() {
         var newComment = new Object();
         newComment.body = document.getElementById("comment");
         newComment.bugId = currentBugId;
@@ -27,7 +27,7 @@ function init() {
             data: JSON.stringify(newComment),
             success: getComments
         });
-    });
+    });*/
 
     $.getJSON("/bug/all", function (data) {
         renderPie(gOpt.value, data);
