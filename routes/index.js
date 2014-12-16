@@ -38,7 +38,7 @@ router.get('/bug/all', function(req, res) {
 router.get('/bug/id/:id', function(req, res) {
     var bugId = req.params.id;
     bugDAO.fetchBugById(bugId, function(results) {
-        res.json(results);
+        res.render('bug-detail', results);
     });
 });
 
